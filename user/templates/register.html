@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+    <h2>Sign in</h2>
+    <form method="POST">{% csrf_token %}
+        <div class="">
+            {{ form.email.label_tag }}
+            <input type="email" class="{% if form.email.errors %}is-valid{% endif %}"
+            id="id_email" name="email" placeholder="Email" value="{{ form.email.value|default:''"
+            />
+            {% if form.email.errors %}
+                <div class="">
+                    {{ form.email.errors}}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.password1.label_tag }}
+        </div>
+    </form>
+{% endblock content %}
