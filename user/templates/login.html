@@ -3,31 +3,33 @@
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="POST">{% csrf_token %}
-    {{form.non_field_errors}}
-    <div class="">
-        {{ form.email.label_tag }}
-        <input type="email" class="{% if form.email.errors %}is-valid{% endif %}"
-        id="id_email" name="email" placeholder="Email" value="{{ form.email.value|default:''}}"
-        />
-        {% if form.email.errors %}
+<div class="flex justify-center">
+    <div class="border p-8 mt-12">
+        <h2 class="text-lg font-bold">Login</h2>
+        <form method="POST">{% csrf_token %}
             <div class="">
-                {{ form.email.errors}}
+                {{ form.email.label_tag }}
+                <input type="email" class="{% if form.email.errors %}is-valid{% endif %}"
+                id="id_email" name="email" placeholder="Email" value="{{ form.email.value|default:''}}"
+                />
+                {% if form.email.errors %}
+                    <div class="">
+                        {{ form.email.errors}}
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
+            <div>
+                {{ form.password.label_tag }}
+                <input type="password" name="password" class="{% if form.password.errors%}is-valid{% endif %}" id="id_password">
+                
+                {% if form.password.errors %}
+                    <div>
+                        {{form.password.errors}}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
-
-    <div>
-        {{ form.password.label_tag }}
-        <input type="password" name="password" class="{% if form.password.errors%}is-valid{% endif %}" id="id_password">
-    
-    {% if form.password.errors %}
-        <div>
-            {{form.password.errors}}
-        </div>
-    {% endif %}
-    </div>
-    <button type="submit">Submit</button>
-</form>
+</div>
 {% endblock content %}
