@@ -9,6 +9,11 @@
 </head>
 <body>
     {% include "include/navbar.html" %}
+    {% for message in messages %}
+        <div class="{{message.tags}}">
+            {{message}}
+        </div>
+    {% endfor %}
     {% block content %}
     {% endblock content %}
 </body>

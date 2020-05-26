@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "user.apps.UserConfig",
+    "picture.apps.PictureConfig"
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cloud_images.urls'
+AUTH_USER_MODEL = "user.User"
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 
 TEMPLATES = [
     {
