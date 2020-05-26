@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AdminUser
 from .models import User, Profile
+from django.utils.html import format_html
+
 
 @admin.register(User)
 class Users(AdminUser):
@@ -24,6 +26,14 @@ class Users(AdminUser):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "image", "username", "date_created")
+    list_display = ("user", "images", "username", "date_created")
     search_fields = ("username",)
     list_filter = ("date_created",)
+
+    def images(self, obj):
+        if obj.image:
+            return format_html(
+                '<img src="%s" width="100" heigth="100" />' % obj.image.url
+            )
+        return ""
+    images.short_description = "User"
