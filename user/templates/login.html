@@ -1,35 +1,82 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-<div class="flex justify-center">
-    <div class="border p-8 mt-12">
-        <h2 class="text-lg font-bold">Login</h2>
-        <form method="POST">{% csrf_token %}
-            <div class="">
-                {{ form.email.label_tag }}
-                <input type="email" class="{% if form.email.errors %}is-valid{% endif %}"
-                id="id_email" name="email" placeholder="Email" value="{{ form.email.value|default:''}}"
-                />
-                {% if form.email.errors %}
-                    <div class="">
-                        {{ form.email.errors}}
+<div class="">
+    <div class="relative">
+        <div class="flex justify-center">
+            <img src="{% static 'img/auth/hoplle.jpg' %}" class="" style="height: 44rem;" alt="" />
+        </div>
+        <div class=" top-0 left-0 absolute">
+            <div class="border-2 w-px5 bg-white px-32 py-32 h-full">
+                <h2 class="mb-7"><p class="font-bold text-gray-800 text-4xl">Sing In to Your Account</p></h2>  
+                <h2 class="mt-4"><p class="font-semibold text-gray-600">Sign in With</p></h2>
+                <div class="flex mt-4 justify-center">
+                    <div class="border w-40 h-16 rounded-lg px-16 py-4">
+                        <img src="" class="h-8 w-8" alt=""/>
                     </div>
-                {% endif %}
-            </div>
-            <div>
-                {{ form.password.label_tag }}
-                <input type="password" name="password" class="{% if form.password.errors%}is-valid{% endif %}" id="id_password">
-                
-                {% if form.password.errors %}
-                    <div>
-                        {{form.password.errors}}
+                    <div class="border w-40 h-16 rounded-lg px-16 py-4 mx-4">
+                        <img src="" class="h-8 w-8" alt=""/>
                     </div>
-                {% endif %}
+                    <div class="border w-40 h-16 rounded-lg px-16 py-4">
+                        <img src="" class="h-8 w-8" alt=""/>
+                    </div>
+                </div>
+                <span class="block my-12">
+                    <h2 class="text-center border-b-2 relative font-bold text-gray-600"><span class="bg-white relative top-4 px-4">Or Countinue With</span></h2>
+                </span>
+                <form method="POST">{% csrf_token %}
+                    <div class="mt-12">
+                        <label class="font-bold text-gray-500 mr-10">{{ form.email.label_tag }}</label>
+                        <input type="email" class="border-2 h-10 w-full mt-4 {% if form.email.errors %}is-valid{% endif %}"
+                        id="id_email" name="email" placeholder="Email" value="{{ form.email.value|default:''}}"
+                        />
+                        {% if form.email.errors %}
+                            <div class="">
+                                {{ form.email.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="my-12">
+                        <label class="font-bold text-gray-500 mr-10">{{ form.password.label_tag }}</label>
+                        <input type="password" name="password" class=" border-2 h-10 w-full mt-4{% if form.password.errors%}is-valid{% endif %}" id="id_password">
+                        
+                        {% if form.password.errors %}
+                            <div>
+                                {{form.password.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                            <label class="ml-2 block text-sm leading-5 text-gray-900">
+                                Remember me
+                            </label>
+                        </div>
+
+                        <div class="text-sm leading-5">
+                            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                Forgot your password?
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            
+                        </span>
+                        Sign in
+                        </button>
+                    </div>
+                </form>
             </div>
-            <button type="submit">Submit</button>
-        </form>
+        </div>
     </div>
 </div>
+        
 {% endblock content %}
+
