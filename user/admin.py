@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AdminUser
-from .models import User
+from .models import User, Profile
 
 @admin.register(User)
 class Users(AdminUser):
@@ -21,3 +21,9 @@ class Users(AdminUser):
     list_display = ("email","is_staff" , "last_login",)
     search_fields = ("email", "first_name", "last_name", )
     ordering = ("email",)
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("user", "image", "username", "date_created")
+    search_fields = ("username",)
+    list_filter = ("date_created",)
