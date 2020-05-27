@@ -1,1 +1,26 @@
-<h2>hai</h2>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+    {% if picture_list %}
+        {% for picture in picture_list %}
+            <div class="container mt-12 mx-auto">
+                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <img class="w-full" src="{{picture.img.url}}" alt="Sunset in the mountains">
+                    <div class="px-6 py-4">
+                    <p class="text-gray-700 text-base">
+                        {{ picture.deskripsi}}
+                    </p>
+                    </div>
+                    <div class="px-6 py-4">
+                        <p class="text-xs text-opacity-25 text-gray-800 font-semibold">date created: {{picture.date_created}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No image</p>
+    {% endif %}
+{% endblock content %}
