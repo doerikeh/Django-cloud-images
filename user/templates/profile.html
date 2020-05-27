@@ -20,7 +20,18 @@
           <p class="text-gray-400 text-sm">{{profiles.user.email }}</p>
         </div>
       </div>
-      
+      <div class="relative flex justify-between items-center flex-row px-6 z-50 -mt-10">
+        <p class="flex items-center text-gray-400"><span
+                                                         class=""></span></p>
+        <button
+                class="p-4 bg-red-600 rounded-full hover:bg-red-500 focus:bg-red-700 transition ease-in duration-200 focus:outline-none">
+          <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6">
+            <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+                                    C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+                                    C15.952,9,16,9.447,16,10z" />
+          </svg>
+        </button>
+      </div>
       <div class="pt-6 pb-8 text-gray-600 text-center">
         <p>Fullstack Developer </p>
         <p class="text-sm">Coding from Planet Earth</p>
@@ -127,64 +138,32 @@
 <div class="flex justify-center">
   <h2 class="text-white font-medium text-3xl">Project</h2>
 </div>
-<div class="containe" style="margin-left: 20rem;">
+<div class="container" style="margin-left: 20rem;">
+  {% for project in project_list %}
     <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
-      <div class="flex justify-between items-center">
-          <span class="font-light text-gray-600">mar 10, 2019</span>
-          <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">Design</a>
-      </div>
-      <div class="mt-2">
-          <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">Accessibility tools for designers and developers</a>
-          <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-      </div>
-      <div class="flex justify-between items-center mt-4">
-          <a class="text-blue-600 hover:underline" href="#">Read more</a>
-          <div>
-              <a class="flex items-center" href="#">
-                  <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar">
-                  <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
-              </a>
-          </div>
-      </div>
+    
+        <div class="flex justify-between items-center">
+            <span class="font-light text-gray-600">{{project.date_created}}</span>
+            {% for tags in project.tags_set.all %}
+              <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="{% url 'user:tagged' tags.slug %}">#{{tags}}</a>
+            {% endfor %}
+        </div>
+        <div class="mt-2">
+            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{{project.title}}</a>
+            <p class="mt-2 text-gray-600">{{project.deskripsi}}</p>
+        </div>
+        <div class="flex justify-between items-center mt-4">
+            <a class="text-blue-600 hover:underline" href="#">Read more</a>
+            <div>
+                <a class="flex items-center" href="#">
+                    <img class="mx-4 w-10 h-10 rounded-full hidden sm:block" src="{{project.profile.image.url}}" alt="avatar">
+                    <h1 class="text-gray-700 font-bold">{{project.profile.username}}</h1>
+                </a>
+            </div>
+        </div>
+      
     </div>
-    <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
-      <div class="flex justify-between items-center">
-          <span class="font-light text-gray-600">mar 10, 2019</span>
-          <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">Design</a>
-      </div>
-      <div class="mt-2">
-          <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">Accessibility tools for designers and developers</a>
-          <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-      </div>
-      <div class="flex justify-between items-center mt-4">
-          <a class="text-blue-600 hover:underline" href="#">Read more</a>
-          <div>
-              <a class="flex items-center" href="#">
-                  <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar">
-                  <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
-              </a>
-          </div>
-      </div>
-    </div>
-    <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
-      <div class="flex justify-between items-center">
-          <span class="font-light text-gray-600">mar 10, 2019</span>
-          <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">Design</a>
-      </div>
-      <div class="mt-2">
-          <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">Accessibility tools for designers and developers</a>
-          <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-      </div>
-      <div class="flex justify-between items-center mt-4">
-          <a class="text-blue-600 hover:underline" href="#">Read more</a>
-          <div>
-              <a class="flex items-center" href="#">
-                  <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar">
-                  <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
-              </a>
-          </div>
-      </div>
-    </div>
+    {% endfor %}
 </div>
 
 </div>

@@ -1,14 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import logging
 from django.contrib.auth import login, authenticate
+
 from django.contrib import messages
 from django.views.generic.edit import FormView
-from .form import UserCreationForm
+from .forms import UserCreationForm
+from .models import Profile, Project
+from taggit.models import Tag
+from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+
 
 logger = logging.getLogger(__name__)
 
 class SingupView(FormView):
-    template_name = "singup.html"
+    template_name = "register.html"
     form_class = UserCreationForm
 
     def get_success_url(self):
@@ -27,6 +35,27 @@ class SingupView(FormView):
         login(self.request, user)
         form.send_mail()
         messages.info(
-            self.request, "YOu Singup success"
+            self.request, "You Singup success"
         )
         return response
+
+def profile(request):
+    profile = Profile.objects.all()
+    project = Project.objects.order_by("-date_created")
+    context = {
+        'profile':profile,
+        'project_list': project
+    }
+    return render (request, "profile.html", context)
+
+def tagged(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    projects = Project.objects.filter(tags=tag)
+    context = {
+        "tag": tag,
+        "project":projects
+    }
+    return render(request, "profile.html", context)
+
+
+
