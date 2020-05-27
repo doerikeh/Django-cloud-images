@@ -5,11 +5,12 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
-<div class="w-screen h-screen flex justify-center items-center mt-20">
+<div>
+<div class="w-screen h-screen flex justify-center items-center mt-32">
     <div class="container mx-auto max-w-sm rounded-lg overflow-hidden shadow-lg my-2 bg-white">
         {% for profiles in profile %}
       <div class="relative z-10" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));">
-        <img class="w-full" src="{{ profiles.image.url}}"
+        <img class="w-screen" src="{{ profiles.image.url}}"
              alt="Profile image" />
         <div class="text-center absolute w-full" style="bottom: 4rem">
           <p class="text-white tracking-wide uppercase text-lg font-bold">{{profiles.username}}</p>
@@ -40,7 +41,93 @@
         </div>
         
       </div>
+      <div class="mb-2 pt-3 flex flex-wrap mx-6 border-t">
+        <div class="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
+          User experience
+        </div>
+        <div class="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
+          ReactJS
+        </div>
+        <div class="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
+          TailwindCSS
+        </div>
+        <div class="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
+          Javascript
+        </div>
+        <div class="text-xs mr-2 my-1 uppercase tracking-wider border px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-indigo-100 cursor-default">
+          Django
+        </div>
+      </div>
     {% endfor %}
     </div>
+    
   </div>
+  
+  <section class="py-12 mt-12">
+    <div class="flex justify-center mt-2">
+      <img src="{% static 'img/media_social/facebook.svg' %}" class="h-8 w-8" alt=""/>
+      <img src="{% static 'img/media_social/gmail.svg' %}" class="h-8 w-8 mx-12" alt=""/>
+      <img src="{% static 'img/media_social/github.svg' %}" class="h-8 w-8" alt=""/>
+    </div>
+    <div class="container mx-auto">
+        <div>
+            <h1 class="text-2xl font-black text-white pb-6 px-6 md:px-12">
+               Hi Im Firdaus AlFajar
+            </h1>
+        </div>
+        <div class="flex flex-wrap px-6">
+          <main class="py-4">
+            <div class="px-4">
+              <div class="block md:flex justify-between md:-mx-2">
+                <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
+                  <div class="bg-white rounded-lg overflow-hidden shadow relative">
+                    <img class="h-full w-full object-cover object-center" src="{% static 'img/speedometer.svg' %}" alt="">
+                    <div class="p-4 h-auto md:h-40 lg:h-48">
+                      <a href="#" class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg">
+                        Fast Application Speed
+                      </a>
+                      <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quidem blanditiis unde asperiores? Officia amet perspiciatis ad quibusdam incidunt eaque, nobis, eveniet neque porro id commodi quisquam debitis!
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
+                  <div class="bg-white rounded-lg overflow-hidden shadow relative">
+                    <img class="h-full w-full object-cover object-center" src="{% static 'img/shield.svg' %}" alt="">
+                    <div class="p-4 h-auto md:h-40 lg:h-48">
+                      <a href="#" class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg">
+                        Secure Application
+                      </a>
+                      <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure aut quia alias ullam eveniet sunt! Ipsa, sunt. Inventore ipsum sit quasi. Alias quasi officiis blanditiis!
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-1/3 md:mx-2 mb-4 md:mb-0">
+                  <div class="bg-white rounded-lg overflow-hidden shadow relative">
+                    <img class="h-full w-full object-cover object-center" src="{% static 'img/paint.svg' %}" alt="">
+                    <div class="p-4 h-auto md:h-40 lg:h-48">
+                      <a href="#" class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg">
+                        Custimezed Design
+                      </a>
+                      <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi nemo magni saepe cumque error quia quae sint ducimus, maiores doloremque.
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+            
+        </div>
+
+    </div>
+</section>
+</div>
 {% endblock content%}
