@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AdminUser
-from .models import User, Profile
+from .models import User, Profile, Project
 from django.utils.html import format_html
 
 
@@ -37,3 +37,10 @@ class ProfileAdmin(admin.ModelAdmin):
             )
         return ""
     images.short_description = "User"
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("title", "date_created", "tags")
+    list_filter = ("date_created",)
+    search_fields = ("title", "tags",)
