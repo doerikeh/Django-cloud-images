@@ -7,17 +7,9 @@
     <div class="container mt-12 mx-auto">
         <div class="flex grid grid-cols-5 gap-4">
         {% for pictures in picture %}
-            <div class="max-w-xs rounded overflow-hidden shadow-lg mr-4">
-                <img class="w-full" src="{{pictures.img.url}}" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                <p class="text-gray-700 text-base">
-                    {{ pictures.deskripsi}}
-                </p>
-                </div>
-                <div class="px-6 py-4">
-                    <p class="text-xs text-opacity-25 text-gray-800 font-semibold">date created: {{pictures.date_created}}</p>
-                </div>
-            </div>
+        <div class="rounded mr-4">
+            <img class="w-full rounded transition duration-500 ease-in-out hover:bg-gray-200 transform hover:-translate-y-1 hover:scale-105" src="{{pictures.img.url}}" alt="Sunset in the mountains">
+        </div>
         {% endfor %}
     </div>
     </div>
