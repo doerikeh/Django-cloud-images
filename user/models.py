@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
 from taggit.managers import TaggableManager
+from django.db.models import Q
 
 
 
@@ -48,7 +49,6 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.email}"
 
-
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='Image %Y/%m/%d')
@@ -58,6 +58,14 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
 
+
+class ProjectManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query)|Q(tags__name__icontains=query))
+            qs = qs.filter(or_lookup).distinct()
+        return qs
 class Project(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     title = models.CharField(max_length=100)
