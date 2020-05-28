@@ -2,6 +2,7 @@ from django.contrib.auth.forms import (
  UserCreationForm as DjangoUserCreationForm
 )
 from django.core.mail import send_mail
+from .models import Project
 from django import forms
 from django.contrib.auth import authenticate
 import logging
@@ -54,5 +55,16 @@ class AuthenticatedForm(forms.Form):
                 "Authenticated Success for email=%s", email
             )
         return self.cleaned_data 
+
     def get_user(self):
         return self.user
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            "title",
+            "deskripsi",
+            "tags"
+        ]

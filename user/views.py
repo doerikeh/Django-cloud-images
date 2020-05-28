@@ -4,12 +4,13 @@ from django.contrib.auth import login, authenticate
 
 from django.contrib import messages
 from django.views.generic.edit import FormView
-from .forms import UserCreationForm
+from .forms import UserCreationForm, ProjectForm
 from .models import Profile, Project
 from taggit.models import Tag
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.template.defaultfilters import slugify
 
 
 
@@ -39,23 +40,19 @@ class SingupView(FormView):
         )
         return response
 
-def profile(request):
+def profile(request, slug=None):
     profile = Profile.objects.all()
     project = Project.objects.order_by("-date_created")
+    form  = ProjectForm(request.POST)
+    if form.is_valid():
+        newproject = form.save(commit=False)
+        newproject.save()
+        form.save_m2m()
+
     context = {
         'profile':profile,
-        'project_list': project
+        "project_list": project,
+        "form": form
     }
     return render (request, "profile.html", context)
-
-def tagged(request, slug):
-    tag = get_object_or_404(Tag, slug=slug)
-    projects = Project.objects.filter(tags=tag)
-    context = {
-        "tag": tag,
-        "project":projects
-    }
-    return render(request, "profile.html", context)
-
-
 
