@@ -10,7 +10,6 @@ from taggit.models import Tag
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.template.defaultfilters import slugify
 
 
 
@@ -40,7 +39,7 @@ class SingupView(FormView):
         )
         return response
 
-def profile(request, slug=None):
+def profile(request):
     profile = Profile.objects.all()
     project = Project.objects.order_by("-date_created")
     form  = ProjectForm(request.POST)

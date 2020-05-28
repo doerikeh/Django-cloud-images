@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "user.apps.UserConfig",
-    "picture.apps.PictureConfig"
+    "picture.apps.PictureConfig",
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+TAGGIT_CASE_INSENSITIVE = False
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = 'user/login/'
 ROOT_URLCONF = 'cloud_images.urls'
 AUTH_USER_MODEL = "user.User"
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
@@ -125,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = '/media/'

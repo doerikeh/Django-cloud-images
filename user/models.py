@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
+from taggit.managers import TaggableManager
+
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -47,10 +50,21 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='Image %Y/%m/%d')
     username = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.email
+
+class Project(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
+    title = models.CharField(max_length=100)
+    slug = models.SlugField()
+    tags = TaggableManager()
+    deskripsi = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
