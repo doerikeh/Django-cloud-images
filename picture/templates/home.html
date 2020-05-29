@@ -11,15 +11,23 @@
             </div>
         </div>
         <div class="container mt-12 mx-auto">
-            <div class="flex grid grid-cols-3 gap-4">
+            <div class="flex grid grid-cols-1 md:grid-cols-4 gap-4">
             {% for picture in picture_list %}
-                    <div class="rounded mr-4">
-                        <img class="w-full rounded transition duration-500 ease-in-out hover:bg-gray-200 transform hover:-translate-y-1 hover:scale-105" src="{{picture.img.url}}" alt="Sunset in the mountains">
-                    </div>
+                <div class="overflow-hidden">
+                    <img id="myImg" class="w-full h-64 object-cover object-center transition duration-500 ease-in-out hover:bg-gray-200 transform hover:-translate-y-1 hover:scale-105" src="{{picture.img.url}}" alt="Sunset in the mountains">
+                </div>
             {% endfor %}
+            <div id="myModal" class="hidden fixed left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-25" style="z-index: 1; padding-top: 100px;">
+                <div class="absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"><svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                  </svg></div>
+                <img class="m-auto block" style="width: 80%; max-width: 700px;" src="" alt="" id="img">
+                <div id="caption" class="m-auto block text-center bg-gray-700" style="padding: 10px 0; height: 150px;"></div>
+            </div>
         </div>
         </div>
     {% else %}
         <p>No image</p>
     {% endif %}
 {% endblock content %}
+
