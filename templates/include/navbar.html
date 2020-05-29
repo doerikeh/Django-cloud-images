@@ -1,28 +1,46 @@
 {% load static %}
-<nav class="flex items-center justify-between flex-wrap bg-white p-6 ">
+<nav id="header" class="flex items-center justify-between flex-wrap bg-white p-6 ">
    
     <div class="flex-1">
         <a href="/">
             <h1 class="text-xl "><p class="text-blue-500 font-semibold">Bubble</p></h1>
         </a>
     </div>
+    
     <div class="flex-1">
         <form method="GET" action="{% url 'picture:search' %}">{% csrf_token %}
             <div class="md:w-2/3 ml-24 relative">
                 <svg id="Capa_1" class="absolute w-6 h-6 mt-2 mr-3 opacity-25 right-0 top-0 " enable-background="new 0 0 515.558 515.558" height="512" viewBox="0 0 515.558 515.558" width="512" 
                 xmlns="http://www.w3.org/2000/svg"><path d="m378.344 332.78c25.37-34.645 40.545-77.2 40.545-123.333 0-115.484-93.961-209.445-209.445-209.445s-209.444 93.961-209.444 209.445 93.961 209.445 209.445 209.445c46.133 0 88.692-15.177 123.337-40.547l137.212 137.212 45.564-45.564c0-.001-137.214-137.213-137.214-137.213zm-168.899 21.667c-79.958 0-145-65.042-145-145s65.042-145 145-145 145 65.042 145 145-65.043 145-145 145z"/>
                 </svg>
-                <input name="search" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border" type="text" placeholder="pencarian" />
+                <input name="q" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border" type="text" placeholder="pencarian" />
             </div>
         </form>
     </div>
 
     {% if user.is_authenticated %}
         <div class="flex-1 ">
-            <div class="flex justify-end">
-                <a href="{% url 'user:profile' %}">
-                   <img src="{% static 'img/IMG_7486.JPG.jpg' %}" class="border w-10 h-10 rounded-full" alt="">
-                </a>
+            <div class="flex justify-end  relative inline-block float-right">                  
+                <div class="relative text-sm">
+                    <button id="userButton" class="flex items-center focus:outline-none mr-3">
+                        <img class="w-8 h-8 rounded-full mr-4" src="{% static 'img/IMG_7486.JPG.jpg' %}" alt="Avatar of User"> <span class="hidden md:inline-block">Hi, User </span>
+                        <svg class="pl-2 h-2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
+                            <g>
+                                <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
+                            </g>
+                        </svg>
+                    </button>
+                    <div id="userMenu" class="bg-white rounded shadow-md mt-2 absolute mt-4 pin-t pin-r min-w-full overflow-auto z-30 invisible">
+                        <ul class="list-reset">
+                            <li><a href="{% url 'user:profile' %}" class="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline">My account</a></li>
+                            <li>
+                                <hr class="border-t mx-2 border-grey-light">
+                            </li>
+                            <li><a href="{% url 'user:logout' %}" class="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
         </div>
     {% else %}
@@ -38,3 +56,6 @@
         </div>
     {% endif %}
 </nav>
+
+
+
