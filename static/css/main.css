@@ -1,0 +1,108 @@
+.grad-bar {
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: gradbar 15s ease infinite;
+    -moz-animation: gradbar 15s ease infinite;
+    animation: gradbar 15s ease infinite;
+}
+
+@-webkit-keyframes gradbar {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes gradbar {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes gradbar {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+/* modal */
+.modal {
+	transition: opacity 0.25s ease;
+  }
+body.modal-active {
+	overflow-x: hidden;
+	overflow-y: visible !important;
+}
+
+
+#myImg {
+	cursor: pointer;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+.modal-content, #caption {  
+	-webkit-animation-name: zoom;
+	-webkit-animation-duration: 0.6s;
+	animation-name: zoom;
+	animation-duration: 0.6s;
+  }
+  
+  @-webkit-keyframes zoom {
+	from {-webkit-transform:scale(0)} 
+	to {-webkit-transform:scale(1)}
+  }
+  
+  @keyframes zoom {
+	from {transform:scale(0)} 
+	to {transform:scale(1)}
+  }
+
+  @media only screen and (max-width: 700px){
+	.modal-content {
+	  width: 100%;
+	}
+  }
+
+  .hasImage:hover section {
+	background-color: rgba(5, 5, 5, 0.4);
+  }
+  .hasImage:hover button:hover {
+	background: rgba(5, 5, 5, 0.45);
+  }
+  
+  #overlay p,
+  i {
+	opacity: 0;
+  }
+  
+  #overlay.draggedover {
+	background-color: rgba(255, 255, 255, 0.7);
+  }
+  #overlay.draggedover p,
+  #overlay.draggedover i {
+	opacity: 1;
+  }
+  
+  .group:hover .group-hover\:text-blue-800 {
+	color: #2b6cb0;
+  }
