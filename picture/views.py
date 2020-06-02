@@ -1,16 +1,17 @@
 from django.shortcuts import render
-
+from django.http import HttpResponseRedirect
 from .models import Picture
 from user.models import Project
 from django.db.models import Q
 
-from django.views.generic.list import ListView
+from django.views.generic import ListView
+from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from itertools import chain
+from .forms import ImageUpload
 
-
-class PictureList(LoginRequiredMixin, ListView):
+class PictureList(ListView):
     model = Picture
     queryset = Picture.objects.all()
     context_object_name = "picture_list"
@@ -47,3 +48,20 @@ class SearchView(ListView):
             self.count = len(qs)
             return qs
         return Picture.objects.none()
+
+def save_upload_file_to_media_root(f):
+    with open('%s%s' % (settings.MEDIA_ROOT, f.name), "wb+") as picture_img:
+        for chunk in f.chunks():
+            picture_img.write(chunk)
+
+def upload(request):
+    if request.method == "POST":
+        form = ImageUpload(request.POST, request.FILES)
+        if form.is_valid():
+            picture = form.save(commit=False)
+            picture.user = request.user
+            picture.save()
+    else:
+        form = ImageUpload()
+    return render(request, "upload_image.html", {"pictures":form})
+        
