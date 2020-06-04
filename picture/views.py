@@ -24,23 +24,22 @@ class PictureDetail(DetailView):
     template_name = "detail_picture.html"
 
 @login_required
-def add_or_change_picture(request, pk=None):
-    picture=None
+def change_picture(request, pk=None):
+    picture = None
     if pk:
         picture = get_object_or_404(Picture, pk=pk)
-    if request.method == "POST":
-        form = ImageUpload(
-            data=request.POST,
-            image=request.FILES,
-            instance=picture
-        )
-        if form.is_valid():
-            picture = form.save()
-            return redirect("picture:picture_detail", pk=picture.pk)
-    else:
-        form = ImageUpload()
-    context = {"picture":picture, "form":form}
-    return render(request, "upload_image_add_or_change.html", context)
+        if request.method == "POST":
+            form = ImageUpload(request.POST, request.FILES, instance=picture)
+            if form.is_valid():
+                picture = form.save()
+                return redirect("picture:detail", pk=picture.pk)
+        else:
+            form = ImageUpload()
+    context = {
+        "form": form,
+        "picture":picture
+    }
+    return render(request, "change_picture.html", context)
 
 @login_required
 def delete_picture(request, pk):
