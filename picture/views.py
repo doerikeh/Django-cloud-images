@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .models import Picture
 from user.models import Project
 from django.db.models import Q
-
-from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,7 +17,40 @@ class PictureList(ListView):
     context_object_name = "picture_list"
     template_name = "home.html"
     redirect_field_name = "user/login/"
-    paginate_by = 20
+
+class PictureDetail(DetailView):
+    model = Picture
+    context_object_name = "picture_detail"
+    template_name = "detail_picture.html"
+
+@login_required
+def add_or_change_picture(request, pk=None):
+    picture=None
+    if pk:
+        picture = get_object_or_404(Picture, pk=pk)
+    if request.method == "POST":
+        form = ImageUpload(
+            data=request.POST,
+            image=request.FILES,
+            instance=picture
+        )
+        if form.is_valid():
+            picture = form.save()
+            return redirect("picture:picture_detail", pk=picture.pk)
+    else:
+        form = ImageUpload()
+    context = {"picture":picture, "form":form}
+    return render(request, "upload_image_add_or_change.html", context)
+
+@login_required
+def delete_picture(request, pk):
+    picture = get_object_or_404(Picture, pk=pk)
+    if request.method == "POST":
+        picture.delete()
+        return redirect("picture:list")
+    context =  {"picture":picture}
+    return render(request, "picture_delete_confirm.html", context)
+    
 
 
 class SearchView(ListView):
@@ -49,10 +82,6 @@ class SearchView(ListView):
             return qs
         return Picture.objects.none()
 
-def save_upload_file_to_media_root(f):
-    with open('%s%s' % (settings.MEDIA_ROOT, f.name), "wb+") as picture_img:
-        for chunk in f.chunks():
-            picture_img.write(chunk)
 
 def upload(request):
     if request.method == "POST":
