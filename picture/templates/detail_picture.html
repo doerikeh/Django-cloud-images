@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Detail Picture{% endblock title %}
+
+{% block content %}
+<div class="flex justify-center items-center mt-12">
+    <div>
+        <p><h1 class="mb-8 font-semibold text-white text-3xl">Create By :{{picture_detail.user.email}}</h1></p>
+        <span class="zoom" id='ex1'>
+            <img class="photo" style="height: auto; width: 70rem;" src="{{picture_detail.img.url}}" alt="">
+        </span>
+    </div>
+</div>
+{% endblock %}
