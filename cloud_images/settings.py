@@ -55,9 +55,11 @@ MIDDLEWARE = [
 TAGGIT_CASE_INSENSITIVE = False
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = 'user/login/'
+LOGOUT_REDIRECT_URL = "/"
 ROOT_URLCONF = 'cloud_images.urls'
 AUTH_USER_MODEL = "user.User"
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 
 
 TEMPLATES = [
@@ -136,3 +138,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+UPLOAD_URL = f"{MEDIA_URL}upload/"
+UPLOAD_ROOT = os.path.join(MEDIA_ROOT, "upload")
