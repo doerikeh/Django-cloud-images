@@ -58,19 +58,19 @@
               <div class="">
                 <label class="font-medium">Title</label>
                 <div class="mt-2">
-                  <input type="text" name="title" class="border w-full rounded-md " placeholder="Title">
+                  <input type="text" name="title" class="border w-full rounded-md h-8" placeholder="Title">
                 </div>
               </div>
               <div class="my-8">
                 <label class="font-medium">Tags</label>
                 <div class="mt-2">
-                  <input type="text" name="tags" data-role="tagsinput" class="border w-full rounded-md" placeholder="Tags"> 
+                  <input type="text" name="tags" data-role="tagsinput" class="border w-full rounded-md h-8" placeholder="Tags"> 
                 </div>
               </div>
               <div>
                 <label class="font-medium">Deskripsi</label>
                 <div class="mt-2">
-                  <input type="text" name="deskripsi" class="border w-full rounded-md" placeholder="Deskripsi"> 
+                  <input type="text" name="deskripsi" class="border w-full rounded-md h-8" placeholder="Deskripsi"> 
                 </div>
               </div>
               <!--Footer-->
@@ -198,9 +198,11 @@
     
         <div class="flex justify-between items-center">
             <span class="font-light text-gray-600">{{project.date_created}}</span>
+            <div class="">
               {% for tag in project.tags.all %}
-              <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="">#{{tag}}</a>
+                  <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="">#{{tag}}</a>
               {% endfor %}
+            </div>
         </div>
         <div class="mt-2">
             <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{{project.title}}</a>

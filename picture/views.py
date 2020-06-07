@@ -122,8 +122,19 @@ def upload_picture(request):
             del data['error']
             picture.filename = os.path.basename(picture.name)
             data["files"].append(picture)
-    json_data = render_to_string("upload.json", data)
+    json_data = render_to_string("json/upload.json", data)
     return HttpResponse(json_data, content_type="application/json", status=status_code)
+
+def add_picture(request):
+    form = ImageUpload()
+    if request.method == "POST":
+        form = ImageUpload(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("picture:img-list")
+        else:
+            form = ImageUpload()
+    return render(request, "add_picture.html", {"form":form})
 
 
 @csrf_protect
@@ -136,7 +147,7 @@ def delete_picture(request, filename):
             upload_storage.delete(upload_to)
         except FileNotFoundError:
             pass
-    json = render_to_string("upload.json", {"file":[]})
+    json = render_to_string("json/upload.json", {"file":[]})
     return HttpResponse(json, conten_type="application/json", status=200)
 
 

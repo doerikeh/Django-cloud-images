@@ -59,13 +59,21 @@ class Profile(models.Model):
         return self.user.email
 
 
-class ProjectManager(models.Manager):
+class ProjectQuerySet(models.QuerySet):
     def search(self, query=None):
-        qs = self.get_queryset()
+        qs = self
         if query is not None:
-            or_lookup = (Q(title__icontains=query)|Q(tags__name__icontains=query))
+            or_lookup = (Q(deskripsi__icontains=query)|
+                        Q(title__icontains=query)|
+                        Q(tags__name__icontains=query))
             qs = qs.filter(or_lookup).distinct()
         return qs
+
+class ProjectManager(models.Manager):
+    def get_queryset(self):
+        return ProjectQuerySet(self.model, using=self._db)
+    def search(self, query=None):
+        return self.get_queryset().search(query=query)
 class Project(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     title = models.CharField(max_length=100)
@@ -73,6 +81,7 @@ class Project(models.Model):
     tags = TaggableManager()
     deskripsi = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
+    objects = ProjectManager()
 
     def __str__(self):
         return self.title

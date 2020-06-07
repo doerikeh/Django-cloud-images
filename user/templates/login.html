@@ -8,7 +8,7 @@
 <div class="">
     <div class="relative">
         <div class="flex justify-center">
-            <img src="{% static 'img/auth/hoplle.jpg' %}" class="" style="height: 44rem;" alt="" />
+            <img src="{% static 'img/auth/1823432.svg' %}" class="" style="height: 44rem;" alt="" />
         </div>
         <div class=" top-0 left-0 absolute">
             <div class="border-2 w-px5 bg-white px-32 py-32 h-full">
@@ -16,13 +16,13 @@
                 <h2 class="mt-4"><p class="font-semibold text-gray-600">Sign in With</p></h2>
                 <div class="flex mt-4 justify-center">
                     <div class="border w-40 h-16 rounded-lg px-16 py-4">
-                        <img src="" class="h-8 w-8" alt=""/>
+                        <img src="{% static 'img/media_social/facebook.svg' %}" class="h-8 w-8" alt=""/>
                     </div>
                     <div class="border w-40 h-16 rounded-lg px-16 py-4 mx-4">
-                        <img src="" class="h-8 w-8" alt=""/>
+                        <img src="{% static 'img/media_social/gmail.svg' %}" class="h-8 w-8" alt=""/>
                     </div>
                     <div class="border w-40 h-16 rounded-lg px-16 py-4">
-                        <img src="" class="h-8 w-8" alt=""/>
+                        <img src="{% static 'img/media_social/github.svg' %}" class="h-8 w-8" alt=""/>
                     </div>
                 </div>
                 <span class="block my-12">
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="text-sm leading-5">
-                            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                            <a href="{% url 'user:password_change' %}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                                 Forgot your password?
                             </a>
                         </div>

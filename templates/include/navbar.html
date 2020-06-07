@@ -32,11 +32,8 @@
                     </button>
                     <div id="userMenu" class="bg-white rounded shadow-md mt-2 absolute mt-4 pin-t pin-r min-w-full overflow-auto z-30 invisible">
                         <ul class="list-reset">
-                            <li><a href="{% url 'user:profile' %}" class="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline">My account</a></li>
-                            <li>
-                                <hr class="border-t mx-2 border-grey-light">
-                            </li>
-                            <li><a href="{% url 'user:logout' %}" class="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline">Logout</a></li>
+                            <li><a href="{% url 'user:profile' %}" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">My account</a></li>
+                            <li><a href="{% url 'user:logout' %}" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Logout</a></li>  
                         </ul>
                     </div>
                 </div>

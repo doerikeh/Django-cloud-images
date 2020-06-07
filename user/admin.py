@@ -41,6 +41,16 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "date_created", "tags")
-    list_filter = ("date_created",)
+    fieldsets = (
+        (None, {'fields': ("profile", 'tags', "title", "slug", 'deskripsi')}),
+    )
+    list_display = ("title", "date_created", "tag_list")
+    prepopulated_fields = {"slug": ("title",)}
+    list_filter = ("date_created", "tags")
     search_fields = ("title", "tags",)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('tags')
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())

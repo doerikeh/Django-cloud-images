@@ -65,6 +65,5 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = [
             "title",
-            "deskripsi",
-            "tags"
+            "deskripsi"
         ]

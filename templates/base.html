@@ -7,6 +7,13 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.fileupload.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script>
+		$(document).ready(function(){
+			$('#ex1').zoom();
+		});
+	</script>
 
     <title>{% block title %}{% endblock title %}</title>
 </head>
@@ -21,9 +28,15 @@
     {% endfor %}
     {% block content %}
     {% endblock content %}
+    {% block js %}
+    {% endblock js %}
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/tagsinput.js' %}"></script>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tmpl.min.js' %}"></script>
+    <script src="{% static 'js/jquery.ui.widget' %}"></script>
+    <script src="{% static 'js/jquery.fileupload-ui.js' %}"></script>
+    <script src="{% static 'js/zoom.js' %}"></script>
     <script>
         /*Toggle dropdown list*/
         /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
@@ -77,5 +90,13 @@
             return false;
         }
         </script>
+    <script>
+		$(document).ready(function(){
+			$('#ex1').zoom();
+			$('#ex2').zoom({ on:'grab' });
+			$('#ex3').zoom({ on:'click' });			 
+			$('#ex4').zoom({ on:'toggle' });
+		});
+	</script>
 </body>
 </html>

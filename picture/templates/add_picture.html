@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Add{% endblock title %}
+{% load i18n %}
+
+{% block content %}
+    <form action="" class="change-done" method="post">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">{% trans "Save" %}</button>
+    </form>
+{% endblock content %}
+
+{% block extrabody %}
+    {% include "image_download.html" %}
+    {% include "upload_image.html" %}
+{% endblock extrabody %}
+
+{% block js %}
+<script>
+    jQuery(function($){
+        if(typeof Uploaders !== "undefined"){
+            var form = document.querySelector("form.change-done");
+            var uploadUrl ="{% url 'picture:upload' %}";
+            new Uploaders(form, uploadUrl, {
+                "labels": {
+                    "Select Picture": "{% trans 'Select Picture' %}",
+                    "Cancel": "{% trans 'Cancel' %}",
+                    "Remove": "{% trans 'Remove' %}",
+                    "Error": "{% trans 'Error' %}",
+                    "Processing...": "{% trans 'Processing' %}",
+                    "Start": "{% trans 'Start' %}"
+                }
+            });
+        }
+    });
+</script>
+{% endblock js %}

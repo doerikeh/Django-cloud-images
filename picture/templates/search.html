@@ -1,18 +1,65 @@
 {% extends "base.html" %}
-
+{% load class_name %}
 {% block title %}Search{% endblock title %}
 
 {% block content %}
-    {% if picture %}
-    <div class="container mt-12 mx-auto">
-        <div class="flex grid grid-cols-5 gap-4">
-        {% for pictures in picture %}
-        <div class="rounded mr-4">
-            <img class="w-full rounded transition duration-500 ease-in-out hover:bg-gray-200 transform hover:-translate-y-1 hover:scale-105" src="{{pictures.img.url}}" alt="Sunset in the mountains">
+    <div class='flex justify-center my-20'>
+        <div class=''>
+            <h3 class='text-white font-semibold text-3xl tracking-wider'>{{ count }} results for <b>{{ query }}</b></h3>
         </div>
-        {% endfor %}
     </div>
-    </div>
-    {% endif %}
+
+    {% for object in object_list %}
+        {% with object|class_name as klass %}
+        
+            {% if klass == 'Picture' %}
+            <div class="container mt-12 mx-auto">
+                <div class="flex grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden">
+                        <img id="myImg" class="w-full h-64 object-cover object-center transition duration-500 ease-in-out hover:bg-gray-200 transform hover:-translate-y-1 hover:scale-105" src="{{object.img.url}}" alt="Sunset in the mountains">
+                    </div>                
+            </div>
+            </div>
+            {% elif klass == 'Project' %}
+            <div class="container mt-12 mx-auto">
+                    <div class="max-w-full px-10 my-4 py-6 bg-white rounded-lg shadow-md">
+                        <div class="flex justify-between items-center">
+                            <span class="font-light text-gray-600">{{object.date_created}}</span>
+                            <div class="">
+                            {% for tag in object.tags.all %}
+                                <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="">#{{tag}}</a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#">{{object.title}}</a>
+                            <p class="mt-2 text-gray-600">{{object.deskripsi}}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a class="text-blue-600 hover:underline" href="#"></a>
+                            <div>
+                                <a class="flex items-center" href="#">
+                                    <img class="mx-4 w-10 h-10 rounded-full hidden sm:block" src="{{object.profile.image.url}}" alt="avatar">
+                                    <h1 class="text-gray-700 font-bold">{{object.profile.username}}</h1>
+                                </a>
+                            </div>
+                        </div>
+                    
+                    </div>
+            <div>
+            {% else %}
+
+                <div class=''>
+                    <div class=''>
+                        <a>{{ object }} | {{ object|class_name }}</a>
+                    </div>
+                </div>
+            {% endif %}
+            
+    {% endwith %}
+    
+    {% empty %}
+        
+    {% endfor %}
 
 {% endblock content %}

@@ -106,3 +106,25 @@ body.modal-active {
   .group:hover .group-hover\:text-blue-800 {
 	color: #2b6cb0;
   }
+
+.zoom {
+	display:inline-block;
+	position: relative;
+}
+
+.zoom:after {
+	content:'';
+	display:block; 
+	width:33px; 
+	height:33px; 
+	position:absolute; 
+	top:0;
+	right:0;
+	background:url("/static/img/icon.png");
+}
+
+.zoom img {
+	display: block;
+}
+
+.zoom img::selection { background-color: transparent; }
